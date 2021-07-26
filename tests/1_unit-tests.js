@@ -88,21 +88,21 @@ suite("UnitTests", () => {
 		done();
 	});
 
-	// test("Logic handles an invalid column placement", function (done) {
-	// 	assert.throws(
-	// 		() => {
-	// 			solver.checkColPlacement(
-	// 				"82..4..6...16..89...98315.749.157.............53..4...96.415..81..7632..3...28.51",
-	// 				"B",
-	// 				"1",
-	// 				"8"
-	// 			);
-	// 		},
-	// 		"column",
-	// 		"Logic handles an invalid column placement"
-	// 	);
-	// 	done();
-	// });
+	test("Logic handles an invalid column placement", function (done) {
+		assert.throws(
+			() => {
+				solver.checkColPlacement(
+					"82..4..6...16..89...98315.749.157.............53..4...96.415..81..7632..3...28.51",
+					"B",
+					"1",
+					"8"
+				);
+			},
+			"column",
+			"Logic handles an invalid column placement"
+		);
+		done();
+	});
 
 	test("Logic handles a valid region (3x3 grid) placement", function (done) {
 		assert.deepEqual(
@@ -118,21 +118,21 @@ suite("UnitTests", () => {
 		done();
 	});
 
-	// test("Logic handles an invalid region (3x3 grid) placement", function (done) {
-	// 	assert.throws(
-	// 		() => {
-	// 			solver.checkRegionPlacement(
-	// 				"82..4..6...16..89...98315.749.157.............53..4...96.415..81..7632..3...28.51",
-	// 				"A",
-	// 				"3",
-	// 				"8"
-	// 			);
-	// 		},
-	// 		"region",
-	// 		"Logic handles invalid region placement"
-	// 	);
-	// 	done();
-	// });
+	test("Logic handles an invalid region (3x3 grid) placement", function (done) {
+		assert.throws(
+			() => {
+				solver.checkRegionPlacement(
+					"82..4..6...16..89...98315.749.157.............53..4...96.415..81..7632..3...28.51",
+					"A",
+					"3",
+					"8"
+				);
+			},
+			"region",
+			"Logic handles invalid region placement"
+		);
+		done();
+	});
 
 	test("Valid puzzle strings pass the solver", function (done) {
 		assert.equal(
@@ -145,18 +145,18 @@ suite("UnitTests", () => {
 		done();
 	});
 
-	// test("Invalid puzzle strings fail the solver", function (done) {
-	// 	assert.throws(
-	// 		() => {
-	// 			solver.solve(
-	// 				"1111a2.84..63.12.7.2..5.....9..1....8.2.3674.3.7.2..9.47...8..1..16....926914.371"
-	// 			);
-	// 		},
-	// 		"Invalid characters in puzzle",
-	// 		"Invalid puzzle strings fail the solver"
-	// 	);
-	// 	done();
-	// });
+	test("Invalid puzzle strings fail the solver", function (done) {
+		assert.throws(
+			() => {
+				solver.solve(
+					"1111a2.84..63.12.7.2..5.....9..1....8.2.3674.3.7.2..9.47...8..1..16....926914.371"
+				);
+			},
+			"Invalid characters in puzzle",
+			"Invalid puzzle strings fail the solver"
+		);
+		done();
+	});
 
 	test("Solver returns the expected solution for an incomplete puzzle", function (done) {
 		assert.equal(
