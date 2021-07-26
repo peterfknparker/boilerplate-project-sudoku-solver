@@ -15,6 +15,10 @@ class SudokuSolver {
 		value = parseInt(value);
 		row = getRowFromCoordinates(row);
 
+		if (board[row][column - 1] === value) {
+			return { valid: true };
+		}
+
 		if (board[row].indexOf(value) !== -1) {
 			throw new Error("row");
 		} else {
@@ -26,7 +30,12 @@ class SudokuSolver {
 		let board = createBoard(puzzleString);
 		let n = Math.sqrt(puzzleString.length);
 		value = parseInt(value);
+		row = getRowFromCoordinates(row);
 		column = column - 1;
+
+		if (board[row][column] === value) {
+			return { valid: true };
+		}
 		for (let r = 0; r < n; r++) {
 			if (board[r][column] === value) {
 				throw new Error("column");
@@ -41,6 +50,9 @@ class SudokuSolver {
 		row = getRowFromCoordinates(row);
 		value = parseInt(value);
 
+		if (board[row][column - 1] === value) {
+			return { valid: true };
+		}
 		// work out starting row and column for each region (0,3,9 etc)
 		row = row - (row % regionSize);
 		column = column - 1 - ((column - 1) % regionSize);
