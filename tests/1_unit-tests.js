@@ -158,14 +158,24 @@ suite("UnitTests", () => {
 		done();
 	});
 
-	// test("Solver returns the expected solution for an incomplete puzzle", function (done) {
-	// 	assert.equal(
-	// 		solver.solve(
-	// 			"82..4..6...16..89...98315.749.157.............53..4...96.415..81..7632..3...28.51"
-	// 		),
-	// 		"827549163531672894649831527496157382218396475753284916962415738185763249374928651",
-	// 		"Solver returns the expected solution for an incomplete puzzle"
-	// 	);
-	// 	done();
-	// });
+	test("Solver returns the expected solution for an incomplete puzzle", function (done) {
+		assert.equal(
+			solver.solve(
+				"82..4..6...16..89...98315.749.157.............53..4...96.415..81..7632..3...28.51"
+			),
+			"827549163531672894649831527496157382218396475753284916962415738185763249374928651",
+			"Solver returns the expected solution for an incomplete puzzle"
+		);
+		done();
+	});
+	test("Solver returns the expected solution for an incomplete puzzle", function (done) {
+		assert.equal(
+			solver.solve(
+				"82..4..6...16..89...98315.749.157.............53..4...96.415..81..7632..3...28.51"
+			),
+			"827549163531672894649831527496157382218396475753284916962415738185763249374928651",
+			"Solver returns the expected solution for an incomplete puzzle"
+		);
+		done();
+	});
 });
