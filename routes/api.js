@@ -12,10 +12,10 @@ module.exports = function (app) {
 			return res.json({ error: "Required field(s) missing" });
 		}
 
-		try {
-			solver.validate(puzzle);
-		} catch (error) {
-			return res.json({ error: error.message });
+		let puzzleValidationError = solver.validate(puzzle).error;
+
+		if (puzzleValidationError) {
+			return res.json({ error: puzzleValidationError });
 		}
 
 		if (!coordinate.match(/[a-i][1-9]/gi)) {
@@ -31,21 +31,34 @@ module.exports = function (app) {
 		let row = coordinate[0],
 			column = coordinate[1];
 
-		try {
-			solver.checkColPlacement(puzzle, row, column, value);
-		} catch (error) {
-			conflict.push(error.message);
+		let checkColError = solver.checkColPlacement(
+			puzzle,
+			row,
+			column,
+			value
+		).error;
+		if (checkColError) {
+			conflict.push(checkColError);
 		}
-		try {
-			solver.checkRowPlacement(puzzle, row, column, value);
-		} catch (error) {
-			conflict.push(error.message);
+		let checkRowError = solver.checkRowPlacement(
+			puzzle,
+			row,
+			column,
+			value
+		).error;
+		if (checkRowError) {
+			conflict.push(checkRowError);
 		}
-		try {
-			solver.checkRegionPlacement(puzzle, row, column, value);
-		} catch (error) {
-			conflict.push(error.message);
+		let checkRegionError = solver.checkRegionPlacement(
+			puzzle,
+			row,
+			column,
+			value
+		).error;
+		if (checkRegionError) {
+			conflict.push(checkRegionError);
 		}
+
 		if (conflict.length !== 0) {
 			res.json({ valid: false, conflict: conflict });
 		} else {
@@ -60,10 +73,12 @@ module.exports = function (app) {
 			return res.json({ error: "Required field missing" });
 		}
 
-		try {
-			return res.json({ solution: solver.solve(puzzle) });
-		} catch (error) {
-			return res.json({ error: error.message });
+		let solveSolution = solver.solve(puzzle);
+		let solveError = solveSolution.error;
+		if (solveError) {
+			return res.json({ error: solveError });
+		} else {
+			return res.json({ solution: solveSolution });
 		}
 	});
 };

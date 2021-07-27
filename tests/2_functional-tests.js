@@ -145,7 +145,7 @@ suite("Functional Tests", () => {
 				assert.deepEqual(
 					res.body.conflict,
 					["column", "region"],
-					"Check a puzzle placement with nultiple placement conflicts: POST request to /api/check"
+					"Check a puzzle placement with multiple placement conflicts: POST request to /api/check"
 				);
 			});
 		done();

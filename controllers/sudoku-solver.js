@@ -1,12 +1,12 @@
 class SudokuSolver {
 	validate(puzzleString) {
 		if (puzzleString.length !== 81) {
-			throw new Error("Expected puzzle to be 81 characters long");
+			return { error: "Expected puzzle to be 81 characters long" };
 		}
 		if (puzzleString.match(/[\.*1-9*]{81}/g)) {
 			return "Valid input string";
 		} else {
-			throw new Error("Invalid characters in puzzle");
+			return { error: "Invalid characters in puzzle" };
 		}
 	}
 
@@ -20,7 +20,7 @@ class SudokuSolver {
 		}
 
 		if (board[row].indexOf(value) !== -1) {
-			throw new Error("row");
+			return { error: "row" };
 		} else {
 			return { valid: true };
 		}
@@ -38,7 +38,7 @@ class SudokuSolver {
 		}
 		for (let r = 0; r < n; r++) {
 			if (board[r][column] === value) {
-				throw new Error("column");
+				return { error: "column" };
 			}
 		}
 		return { valid: true };
@@ -62,14 +62,17 @@ class SudokuSolver {
 		for (let i = row; i < row + regionSize; i++) {
 			for (let j = column; j < column + regionSize; j++) {
 				if (board[i][j] === value) {
-					throw new Error("region");
+					return { error: "region" };
 				}
 			}
 		}
 		return { valid: true };
 	}
 	solve(puzzleString) {
-		this.validate(puzzleString);
+		let validateError = this.validate(puzzleString).error;
+		if (validateError) {
+			return { error: validateError };
+		}
 		//from:https://www.geeksforgeeks.org/sudoku-backtracking-7/
 		/* A Backtracking program in
 Javascript to solve Sudoku problem */
@@ -185,7 +188,7 @@ Javascript to solve Sudoku problem */
 			});
 			return output;
 		} else {
-			throw new Error("Puzzle cannot be solved");
+			return { error: "Puzzle cannot be solved" };
 		}
 
 		// This code is contributed by avanitrachhadiya2155
